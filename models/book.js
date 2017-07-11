@@ -22,7 +22,8 @@ module.exports = function(sequelize, DataTypes) {
     img_url: { type: DataTypes.TEXT },
     characters: { type: DataTypes.TEXT},
     teams: { type: DataTypes.TEXT}
-    }
+    } 
+
   );
 
   // This is the updated version and replaces the use of classMethods
