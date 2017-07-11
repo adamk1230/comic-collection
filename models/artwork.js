@@ -1,12 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Artwork = sequelize.define("Artwork", {
-    books_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isNumeric: true
-      }
-    },
+    
     page_num: { type: DataTypes.STRING },
     format: { type: DataTypes.STRING },
     img_url: { type: DataTypes.TEXT },
