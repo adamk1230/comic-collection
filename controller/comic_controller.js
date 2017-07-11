@@ -1,12 +1,30 @@
 var express = require("express");
+var sequelize = require("sequelize");
 var router = express.Router();
 
+
 var db = require("../models");
+//find all
+router.get("/", function(req, res) {
+   
+  db.Book.findAll({
+    // order: sequelize.col('publish_date', 'DESC')
+    order:   [['publish_date', 'DESC']] 
+  }).then(function(dbBook){
+    res.json(dbBook);
+  }).catch(function (err){
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+      });
+
+});
+
 
 // Search by Title
 router.post("/title", function(req, res) {
    
   db.Book.findAll({
+    order: [['publish_date', 'DESC']],
     where: {
       title: req.body.title
     }
@@ -81,7 +99,6 @@ router.post("/artwork", function(req, res) {
 
 
 });
-
 
 
 
