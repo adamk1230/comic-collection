@@ -32,7 +32,7 @@
           <input type="text" class="form-control" id="searchString" placeholder="Wolverine">
         </div>
         
-        <button type="submit" class="btn btn-default" id="searchButton">Submit</button>
+        <button type="button" class="btn btn-default" id="searchButton">Submit</button>
 
       </form>  
 
@@ -63,33 +63,3 @@
   </div>
 
 </div>
-  <script type="text/javascript">
-    $("#searchButton").on("click", function() {
-      event.preventDefault();
-
-      // Pick-up search value
-      var searchString = $("#searchString").val().trim();
-
-      // Pick up radio button value
-      var typeSearch = $('input[name="searchRadio"]:checked').val();
-
-      // Determine which route to use for search based on radio button value
-      if (typeSearch == 'character') {
-      
-      $.post("/character", searchString)
-      .done(function(data){
-        // Update listing
-      });
-
-      } else {
-
-        $.post("/title", searchString)
-        .done(function(data){
-          // Update listing
-        });
-
-      }
-      
-    }
-
-  </script>

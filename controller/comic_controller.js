@@ -11,7 +11,10 @@ router.get("/", function(req, res) {
     // order: sequelize.col('publish_date', 'DESC')
     order:   [['publish_date', 'DESC']] 
   }).then(function(dbBook){
-    res.json(dbBook);
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
   }).catch(function (err){
         console.log("Error Message: " + err);
         res.send("You got an error!");
@@ -37,9 +40,54 @@ router.post("/title", function(req, res) {
 
 });
 
+router.get("/title/:title", function(req, res) {
+   var title = req.params.title
+   title = decodeURI(title);
+   var hasTitle = "%"+title+"%";
+  db.Book.findAll({
+    order: [['publish_date', 'DESC']],
+    where: {
+      title: {
+        $like: hasTitle
+      }
+    }
+  }).then(function(dbBook){
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
+  }).catch(function (err){
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+      });
+
+});
+
 //Search by Character
-router.post("/character", function(req, res) {
-   var hasCharacter = "%"+req.body.character+"%"
+// router.post("/character", function(req, res) {
+//    var hasCharacter = "%"+req.body.character+"%"
+//   db.Book.findAll({
+//     where: {
+//       characters: {
+//         $like: hasCharacter
+//       }
+//     }
+//   }).then(function(dbBook){
+//     var hbsObject ={
+//       books: dbBook
+//     };
+//     res.render("index", hbsObject);
+//   }).catch(function (err){
+//         console.log("Error Message: " + err);
+//         res.send("You got an error!");
+//       });
+
+// });
+
+router.get("/character/:character", function(req, res) {
+  var character = req.params.character
+   character = decodeURI(character);
+   var hasCharacter = "%"+character+"%";
   db.Book.findAll({
     where: {
       characters: {
@@ -47,7 +95,11 @@ router.post("/character", function(req, res) {
       }
     }
   }).then(function(dbBook){
-    res.json(dbBook);
+    console.log(dbBook);
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
   }).catch(function (err){
         console.log("Error Message: " + err);
         res.send("You got an error!");
