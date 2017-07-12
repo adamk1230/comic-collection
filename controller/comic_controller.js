@@ -11,7 +11,10 @@ router.get("/", function(req, res) {
     // order: sequelize.col('publish_date', 'DESC')
     order:   [['publish_date', 'DESC']] 
   }).then(function(dbBook){
-    res.json(dbBook);
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
   }).catch(function (err){
         console.log("Error Message: " + err);
         res.send("You got an error!");
@@ -47,7 +50,31 @@ router.post("/character", function(req, res) {
       }
     }
   }).then(function(dbBook){
-    res.json(dbBook);
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
+  }).catch(function (err){
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+      });
+
+});
+
+router.post("/character", function(req, res) {
+   var hasCharacter = "%"+req.body.character+"%"
+  db.Book.findAll({
+    where: {
+      characters: {
+        $like: hasCharacter
+      }
+    }
+  }).then(function(dbBook){
+    console.log(dbBook);
+    var hbsObject ={
+      books: dbBook
+    };
+    res.render("index", hbsObject);
   }).catch(function (err){
         console.log("Error Message: " + err);
         res.send("You got an error!");
