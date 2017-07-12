@@ -5,8 +5,18 @@
 	margin-right: 20px;
 }
 
+.db_image_product {
+	height: 300px;
+	float:left;
+	margin-right: 20px;
+}
+
 h1 {
 	font-family: 'Bangers', cursive;
 	font-weight: normal;
 	color: white !important;
+}
+
+h2 {
+	color:white !important;
 }

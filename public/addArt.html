@@ -60,9 +60,9 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label for="image_url" class="col-sm-2 control-label">Image URL</label>
+	    <label for="img_url" class="col-sm-2 control-label">Image URL</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="image_url">
+	      <input type="text" class="form-control" id="img_url">
 	    </div>
 	  </div>
 
@@ -75,12 +75,46 @@
 
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default">Submit</button>
+	      <button type="submit" id="addArt" class="btn btn-default">Submit</button>
 	    </div>
 	  </div>
 	</form>
 
 </div>
+
+<script type="text/javascript">
+    
+    $("#addArt").on("click", function(event) {
+      event.preventDefault();
+
+      var newArtwork = {
+        title: $("#title").val().trim(),
+        page_num: $("#pageNumber").val().trim(),
+        format: $("#format").val().trim(),
+        img_url: $("#img_url").val().trim(),
+        description: $("#description").val().trim(),
+        feature: $("#feature").val().trim(),
+        BookId: $("#books_id").val().trim()
+      };
+
+      function replaceStr(str) {
+  		return str
+	      .replace(/&/g, "&amp;")
+	      .replace(/</g, "&lt;")
+	      .replace(/>/g, "&gt;")
+	      .replace(/"/g, "&quot;")
+	      .replace(/'/g, "&#039;");
+			}
+
+			newArtwork.description = replaceStr(newArtwork.description);
+      
+      $.post("/artwork", newArtwork)
+      .done(function(data) {
+        console.log(data);
+        alert("Adding artwork to database...");
+      });
+    });
+  </script>
 
 		</body>
 	</html>

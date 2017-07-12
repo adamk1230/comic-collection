@@ -1,0 +1,26 @@
+{{!-- Header with link back to listing page --}}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>  BACK TO LIST
+      </a>
+    </div>
+  </div>
+</nav>
+
+{{!-- Book Information --}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12"><img src="{{this.img_url}}" class="db_image_product" id="bookImage" />
+      <h2>{{this.title}}</h2>
+      <p>Year: {{this.publish_date}}</p>
+      <p>Publisher: {{this.publisher}}</p>
+      <p>Role: {{this.role}}</p>
+      <p>Characters: {{this.characters}}</p>
+      <p>Teams: {{this.teams}}</p>
+      <p>Synopsis: {{this.synopsis}}</p>
+      <p>Artwork available? <strong>{{this.available}}</strong></p>
+    </div>
+  </div>
+</div>
