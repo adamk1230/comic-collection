@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Bootswatch -->
+		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.min.css">
+		<!-- Local Styles -->
+		<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+
+		<title>Add Artwork | Art Database</title>
+
+	</head>
+	<body>
+
+	<div class = "jumbotron">
+    <div class = "container">
+      <h1>Art Database</h1>
+      <h3>Add Artwork</h3>
+    </div>
+  </div>
+
+	<div class="container">
+
+  <!-- Add Book Form -->
+  <form class="form-horizontal">
+
+  	<div class="form-group">
+	    <label for="books_id" class="col-sm-2 control-label">Book Database ID</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="books_id" placeholder="231">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="pageNumber" class="col-sm-2 control-label">Page Number(s)</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="pageNumber" placeholder="18">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="format" class="col-sm-2 control-label">Format</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="format" placeholder="Double-page spread">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="description" class="col-sm-2 control-label">Description</label>
+	    <div class="col-sm-10">
+	      <textarea rows=3 type="text" class="form-control" id="description" placeholder="Wraparound cover done in pencil on bristol board. Not inked."></textarea> 
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="img_url" class="col-sm-2 control-label">Image URL</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="img_url">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="feature" class="col-sm-2 control-label">Feature</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="feature" placeholder="Use commas: Spider-Man, Wolverine">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" id="addArt" class="btn btn-default">Submit</button>
+	    </div>
+	  </div>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+    
+    $("#addArt").on("click", function(event) {
+      event.preventDefault();
+
+      var newArtwork = {
+        
+        page_num: $("#pageNumber").val().trim(),
+        format: $("#format").val().trim(),
+        img_url: $("#img_url").val().trim(),
+        description: $("#description").val().trim(),
+        feature: $("#feature").val().trim(),
+        BookId: $("#books_id").val().trim()
+      };
+
+      function replaceStr(str) {
+  		return str
+	      .replace(/&/g, "&amp;")
+	      .replace(/</g, "&lt;")
+	      .replace(/>/g, "&gt;")
+	      .replace(/"/g, "&quot;")
+	      .replace(/'/g, "&#039;");
+			}
+
+			newArtwork.description = replaceStr(newArtwork.description);
+      console.log(newArtwork)
+      $.post("/artwork", newArtwork)
+      .done(function(data) {
+        console.log(data);
+        alert("Adding artwork to database...");
+      });
+    });
+  </script>
+
+		</body>
+	</html>

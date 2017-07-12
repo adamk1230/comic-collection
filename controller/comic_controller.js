@@ -22,6 +22,30 @@ router.get("/", function(req, res) {
 
 });
 
+router.get("/product/:id", function(req, res) {
+
+  db.Book.findAll({
+    include: [db.Artwork],
+    where: {
+      id: req.params.id
+    }
+  }).then(function(dbBook){
+    var hbsObject ={
+      books: dbBook
+    };
+    var cleanedData = JSON.parse(JSON.stringify(hbsObject));
+    console.log(cleanedData)
+    // console.log(cleanedData.books[0].Artworks)
+    // console.log(JSON.parse(JSON.stringify(hbsObject)));
+    // console.log(hbsObject)
+    // console.log(hbsObject.books[0].Artworks);
+    res.render("product", hbsObject);
+  }).catch(function (err){
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+      });
+});
+
 
 // Search by Title
 router.post("/title", function(req, res) {
@@ -107,6 +131,13 @@ router.get("/character/:character", function(req, res) {
 
 });
 
+router.get("/addbook", function(req, res) {
+
+  
+    res.render("addBook")
+  
+});
+
 // Add new Book
 router.post("/book", function(req, res) {
   
@@ -118,7 +149,7 @@ router.post("/book", function(req, res) {
         publisher: req.body.publisher,
         synopsis: req.body.synopsis,
         role: req.body.role,
-        img_url: req.body.img,
+        img_url: req.body.img_url,
         characters: req.body.characters,
         teams: req.body.teams
       }).then(function (dbBook){
@@ -129,6 +160,13 @@ router.post("/book", function(req, res) {
       });
 
 
+});
+
+router.get("/addart", function(req, res) {
+
+  
+    res.render("addArt")
+  
 });
 
 // Add new Artwork
