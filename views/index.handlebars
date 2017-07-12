@@ -1,0 +1,95 @@
+  <!-- Jumbotron -->
+  <div class = "jumbotron">
+    <div class = "container">
+      <h1>Published Works</h1>
+      <h3>Comics &amp; Graphic Novels</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+      <!-- Search Form -->
+
+      <form class="form-inline">
+
+      <div class="form-group">
+        <label for="searchString" class="control-label">SEARCH: &nbsp;</label>
+      </div>
+
+      <div class="form-group">
+         <label class="radio-inline">
+              <input type="radio" name="searchRadio" id="byTitle" value="title" checked="checked"> By Title
+            </label>
+
+            <label class="radio-inline">
+              <input type="radio" name="searchRadio" id="byCharacter" value="character"> By Character &nbsp;
+            </label>
+        </div>
+
+        <div class="form-group">       
+          <input type="text" class="form-control" id="searchString" placeholder="Wolverine">
+        </div>
+        
+        <button type="submit" class="btn btn-default" id="searchButton">Submit</button>
+
+      </form>  
+
+      </div> <!-- End of column -->
+    </div> <!-- End of row -->
+
+<hr />
+  <div class="row">
+    <div class="col-md-12" id="bookList">
+
+      <!-- Book Listing -->
+      {{#each books}}
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-12"><img src="{{this.img_url}}" class="db_image" />
+              <h4>{{this.title}} #{{this.issue}} {{this.publish_date}}</h4>
+              <p>Publisher: {{this.publisher}} | Role: {{this.role}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {{/each}}
+
+    </div>
+  </div>
+
+</div>
+  <script type="text/javascript">
+    $("#searchButton").on("click", function() {
+      event.preventDefault();
+
+      // Pick-up search value
+      var searchString = $("#searchString").val().trim();
+
+      // Pick up radio button value
+      var typeSearch = $('input[name="searchRadio"]:checked').val();
+
+      // Determine which route to use for search based on radio button value
+      if (typeSearch == 'character') {
+      
+      $.post("/character", searchString)
+      .done(function(data){
+        // Update listing
+      });
+
+      } else {
+
+        $.post("/title", searchString)
+        .done(function(data){
+          // Update listing
+        });
+
+      }
+      
+    }
+
+  </script>

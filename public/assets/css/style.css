@@ -1,23 +1,12 @@
 
-.jumbotron {
-    
-    
+.db_image {
+	height: 120px;
+	float:left;
+	margin-right: 20px;
 }
 
-.container 
-    text-align: center;
-    
-}
-
-.Mainsearch {
-    input[type=text] {
-    width: 130px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-/* When the input field gets focus, change its width to 100% */
-input[type=text]:focus {
-    width: 100%;
-}
+h1 {
+	font-family: 'Bangers', cursive;
+	font-weight: normal;
+	color: white !important;
 }
