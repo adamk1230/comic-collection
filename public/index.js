@@ -3,6 +3,7 @@ $("#searchButton").on("click", function() {
 
             // Pick-up search value
             var searchString = $("#searchString").val().trim();
+            searchString = encodeURI(searchString);
 
             // Pick up radio button value
             var typeSearch = $('input[name="searchRadio"]:checked').val();
@@ -14,15 +15,18 @@ $("#searchButton").on("click", function() {
 
 
             if (typeSearch == 'character') {
+                var url = currentURL+'/character/'+searchString;
+                // window.location.href = url;
+                window.location.replace (url);
+                // window.location.pathname = 'character/'+searchString;
 
 
 
-              $.ajax({
-                url: currentURL+"/character",
-                type: "post",
-                data: "character="+searchString,
-                success: function(res) {}
-              })
+              // $.ajax({
+              //   url: currentURL+"/character/"+searchString,
+              //   type: "get",
+              //   success: function(res) {}
+              // })
 
 
 
@@ -34,10 +38,16 @@ $("#searchButton").on("click", function() {
 
             } else {
 
-                $.post("/title", searchString)
-                    .done(function(data) {
-                        // Update listing
-                    });
+                var url = currentURL+'/title/'+searchString;
+                // window.location.href = url;
+                window.location.replace (url);
+                // window.location.pathname = 'character/'+searchString;
+
+
+                // $.post("/title", searchString)
+                //     .done(function(data) {
+                //         // Update listing
+                //     });
 
             }
 

@@ -40,13 +40,15 @@ router.post("/title", function(req, res) {
 
 });
 
-//Search by Character
-router.post("/character", function(req, res) {
-   var hasCharacter = "%"+req.body.character+"%"
+router.get("/title/:title", function(req, res) {
+   var title = req.params.title
+   title = decodeURI(title);
+   var hasTitle = "%"+title+"%";
   db.Book.findAll({
+    order: [['publish_date', 'DESC']],
     where: {
-      characters: {
-        $like: hasCharacter
+      title: {
+        $like: hasTitle
       }
     }
   }).then(function(dbBook){
@@ -61,8 +63,31 @@ router.post("/character", function(req, res) {
 
 });
 
-router.post("/character", function(req, res) {
-   var hasCharacter = "%"+req.body.character+"%"
+//Search by Character
+// router.post("/character", function(req, res) {
+//    var hasCharacter = "%"+req.body.character+"%"
+//   db.Book.findAll({
+//     where: {
+//       characters: {
+//         $like: hasCharacter
+//       }
+//     }
+//   }).then(function(dbBook){
+//     var hbsObject ={
+//       books: dbBook
+//     };
+//     res.render("index", hbsObject);
+//   }).catch(function (err){
+//         console.log("Error Message: " + err);
+//         res.send("You got an error!");
+//       });
+
+// });
+
+router.get("/character/:character", function(req, res) {
+  var character = req.params.character
+   character = decodeURI(character);
+   var hasCharacter = "%"+character+"%";
   db.Book.findAll({
     where: {
       characters: {
