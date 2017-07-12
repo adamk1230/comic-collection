@@ -1,59 +1,100 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
+	<meta charset="UTF-8">
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Bootswatch -->
+		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.min.css">
+		<!-- Local Styles -->
+		<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 
-	<title>Add Book to Database</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<title>Add Book | Comics &amp; Graphic Novels</title>
 
-</head>
-<body>
-<div class="row">
-  <div class="col-md-12"></div>
-</div>
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-	<form>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Title</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Title">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Issue</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Issue">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Year of Publication</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Year of Publication">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Publisher</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Publisher">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Synopsis</label>
-	    <textarea class="form-control" rows="3"></textarea>
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Role</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Role">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Image URL</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Image URL">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Characters</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Characters">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Teams</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Teams">
-	  </div>
-	  <button type="submit" class="btn btn-default">Submit</button>
-	</form>
+	</head>
+	<body>
+
+	<div class = "jumbotron">
+    <div class = "container">
+      <h1>Published Works</h1>
+      <h3>Add Book</h3>
+    </div>
   </div>
-  <div class="col-md-2"></div>
+
+	<div class="container">
+
+  <!-- Add Book Form -->
+  <form class="form-horizontal">
+
+	  <div class="form-group">
+	    <label for="title" class="col-sm-2 control-label">Title</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="title" placeholder="Amazing Spider-Man and Wolverine">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="issue" class="col-sm-2 control-label">Issue Number</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="issue" placeholder="24">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="publishDate" class="col-sm-2 control-label">Year of Publish</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="publishDate" placeholder="2012">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="role" class="col-sm-2 control-label">Role</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="role" placeholder="Cover Artist">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="synopsis" class="col-sm-2 control-label">Synopsis</label>
+	    <div class="col-sm-10">
+	      <textarea rows=3 type="text" class="form-control" id="synopsis" placeholder="Another great event featuring your favorite web-slinger and Wolverine."></textarea> 
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="image_url" class="col-sm-2 control-label">Image URL</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="image_url">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="characters" class="col-sm-2 control-label">Characters</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="characters" placeholder="Use commas: Spider-Man, Wolverine">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="teams" class="col-sm-2 control-label">Teams</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="teams" placeholder="Use commas: Avengers, X-Men">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" class="btn btn-default">Submit</button>
+	    </div>
+	  </div>
+	</form>
+
 </div>
-</body>
-</html>
+
+		</body>
+	</html>
