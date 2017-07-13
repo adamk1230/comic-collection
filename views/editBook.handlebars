@@ -1,6 +1,4 @@
 
-<!-- Add Book -->
-
 	<div class = "jumbotron">
     <div class = "container">
       <h1>Published Works</h1>
@@ -13,68 +11,71 @@
 	<div id="message"></div>
 
   <!-- Add Book Form -->
+  {{#each books}}
+  <h3 value="{{this.id}}">Database ID: {{this.id}}</h3>
+  <input type="hidden" name="id" id="BookId" value="{{this.id}}">
   <form class="form-horizontal">
 
 	  <div class="form-group">
 	    <label for="title" class="col-sm-2 control-label">Title</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="title" placeholder="Amazing Spider-Man and Wolverine">
+	      <input type="text" class="form-control" id="title" value="{{this.title}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="issue" class="col-sm-2 control-label">Issue Number</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="issue" placeholder="24">
+	      <input type="text" class="form-control" id="issue" value="{{this.issue}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="publishDate" class="col-sm-2 control-label">Year of Publish</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="publishDate" placeholder="2012">
+	      <input type="text" class="form-control" id="publishDate" value="{{this.publish_date}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="role" class="col-sm-2 control-label">Role</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="role" placeholder="Cover Artist">
+	      <input type="text" class="form-control" id="role" value="{{this.role}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="publisher" class="col-sm-2 control-label">Publisher</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="publisher" placeholder="Marvel">
+	      <input type="text" class="form-control" id="publisher" value="{{this.publisher}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="synopsis" class="col-sm-2 control-label">Synopsis</label>
 	    <div class="col-sm-10">
-	      <textarea rows=3 type="text" class="form-control" id="synopsis" placeholder="Another great event featuring your favorite web-slinger and Wolverine."></textarea> 
+	      <textarea rows=3 type="text" class="form-control" id="synopsis" value="{{{this.synopsis}}}">{{{this.synopsis}}}</textarea> 
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="img_url" class="col-sm-2 control-label">Image URL</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="img_url">
+	      <input type="text" class="form-control" id="img_url" value="{{this.img_url}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="characters" class="col-sm-2 control-label">Characters</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="characters" placeholder="Use commas: Spider-Man, Wolverine">
+	      <input type="text" class="form-control" id="characters" value="{{this.characters}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="teams" class="col-sm-2 control-label">Teams</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="teams" placeholder="Use commas: Avengers, X-Men">
+	      <input type="text" class="form-control" id="teams" value="{{this.teams}}">
 	    </div>
 	  </div>
 
@@ -86,13 +87,17 @@
 	</form>
 
 </div>
+{{/each}}
 
 <script type="text/javascript">
+
+	var currentURL = window.location.origin;
     
     $("#addBook").on("click", function(event) {
       event.preventDefault();
 
       var newBook = {
+      	id: $("#BookId").val(),
         title: $("#title").val().trim(),
         issue: $("#issue").val().trim(),
         publish_date: $("#publishDate").val().trim(),
@@ -103,44 +108,22 @@
         characters: $("#characters").val().trim(),
         teams: $("#teams").val().trim()
       };
+      console.log($("#BookId").val());
+      console.log("MADE IT HERE!");
+      console.log(newBook.id);
+      console.log(newBook);
 
-      // function to convert paragraph breaks to HTML tags
-   	  function replaceStr(str) {
-  			return str
-	      .replace(/\r?\n|\r/g, "<br /><br />");
-			}
-
-			newBook.synopsis = replaceStr(newBook.synopsis);
-
-      // function to convert characters to HTML entities
-   	//   function replaceStrCharacters(str) {
-  	// 		return str
-	  //     .replace(/&/g, "&amp;")
-	  //     .replace(/</g, "&lt;")
-	  //     .replace(/>/g, "&gt;")
-	  //     .replace(/"/g, "&quot;")
-	  //     .replace(/'/g, "&#039;");
-			// }
       
-      $.post("/book", newBook)
-      .done(function(data) {
-        console.log(data);
-        // alert("Adding book...");
-
-        // Display sucess message at top of page
-        $("#message").html("<p>Success! Book added to database. Add another or <a href=\"/\">view entire collection.</a></p>");
-
-        // Clear the form
-        $("#title").val("");
-        $("#issue").val("");
-        $("#publishDate").val("");
-        $("#publisher").val("");
-        $("#synopsis").val("");
-        $("#role").val("");
-        $("#img_url").val("");
-        $("#characters").val("");
-        $("#teams").val("");
-      });
+      
+      $.post("/cms/edit", newBook)
+      .then(function(data) {
+      	console.log("You Made it Here")
+      window.location.replace(data);
+      // If there's an error, log the error
+    }).catch(function(err) {
+      console.log(err);
     });
-
+    });
   </script>
+
+	

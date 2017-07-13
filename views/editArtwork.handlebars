@@ -1,10 +1,8 @@
 
-<!-- Add Artwork -->
-
 	<div class = "jumbotron">
     <div class = "container">
-      <h1>Art Database</h1>
-      <h3>Add Artwork</h3>
+      <h1>Published Works</h1>
+      <h3>Add Book</h3>
     </div>
   </div>
 
@@ -12,48 +10,51 @@
 	<!-- Sucess message -->
 	<div id="message"></div>
 
-  <!-- Add Artwork Form -->
+  <!-- Add Book Form -->
+  {{#each books}}
+  <h3 value="{{this.id}}">Database ID: {{this.id}}</h3>
+  <input type="hidden" name="id" id="ArtId" value="{{this.id}}">
   <form class="form-horizontal">
 
-  	<div class="form-group">
+	  <div class="form-group">
 	    <label for="books_id" class="col-sm-2 control-label">Book Database ID</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="books_id" placeholder="231">
+	      <input type="text" class="form-control" id="books_id" value="{{this.BookId}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="pageNumber" class="col-sm-2 control-label">Page Number(s)</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="pageNumber" placeholder="18">
+	      <input type="text" class="form-control" id="pageNumber" value="{{this.page_num}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="format" class="col-sm-2 control-label">Format</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="format" placeholder="Double-page spread">
+	      <input type="text" class="form-control" id="format" value="{{this.format}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="description" class="col-sm-2 control-label">Description</label>
 	    <div class="col-sm-10">
-	      <textarea rows=3 type="text" class="form-control" id="description" placeholder="Wraparound cover done in pencil on bristol board. Not inked."></textarea> 
+	      <textarea rows=3 type="text" class="form-control" id="description" value="{{this.description}}">{{this.description}}</textarea> 
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="img_url" class="col-sm-2 control-label">Image URL</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="img_url">
+	      <input type="text" class="form-control" id="img_url" value="{{this.img_url}}">
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="feature" class="col-sm-2 control-label">Feature</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="feature" placeholder="Use commas: Spider-Man, Wolverine">
+	      <input type="text" class="form-control" id="feature" value="{{this.feature}}">
 	    </div>
 	  </div>
 
@@ -65,14 +66,18 @@
 	</form>
 
 </div>
+{{/each}}
 
 <script type="text/javascript">
+
+	var currentURL = window.location.origin;
     
     $("#addArt").on("click", function(event) {
       event.preventDefault();
 
       var newArtwork = {
         
+        id: $("#ArtId").val(),
         page_num: $("#pageNumber").val().trim(),
         format: $("#format").val().trim(),
         img_url: $("#img_url").val().trim(),
@@ -80,46 +85,19 @@
         feature: $("#feature").val().trim(),
         BookId: $("#books_id").val().trim()
       };
-
-      // function to convert paragraph breaks to HTML tags
-   	  function replaceStr(str) {
-  			return str
-  			.replace(/\r?\n|\r/g, "<br />");
-			}
-
-			newArtwork.description = replaceStr(newArtwork.description);
-
-      // function to convert characters to HTML entities
-   	//  function replaceStrCharacters(str) {
-  	// 	return str
-	  //     .replace(/&/g, "&amp;")
-	  //     .replace(/</g, "&lt;")
-	  //     .replace(/>/g, "&gt;")
-	  //     .replace(/"/g, "&quot;")
-	  //     .replace(/'/g, "&#039;");
-			// }
-
+    
 
       console.log(newArtwork);
-
-      $.post("/artwork", newArtwork)
-      .done(function(data) {
-
-        console.log(data);
-        // alert("Adding artwork to database...");
-
-				// Display sucess message at top of page
-        $("#message").html("<p>Success! Artwork added to database.</p>");
-
-        // Clear form 
-        $("#pageNumber").val("");
-        $("#format").val("");
-        $("#img_url").val("");
-        $("#description").val("");
-        $("#feature").val("");
-        $("#books_id").val("");
-
-    	});
-     });
-
+      
+      $.post("/cms/editArt", newArtwork)
+      .then(function(data) {
+      	console.log("You Made it Here")
+      window.location.replace(data);
+      // If there's an error, log the error
+    }).catch(function(err) {
+      console.log(err);
+    });
+    });
   </script>
+
+	

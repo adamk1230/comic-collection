@@ -44,9 +44,6 @@
     <div class="col-md-12" id="bookList">
 
       <!-- Book Listing -->
-
-    {{#if books}}
-
       {{#each books}}
       <a href="/product/{{this.id}}">
       <div class="panel panel-default">
@@ -54,8 +51,12 @@
         
           <div class="row">
             <div class="col-md-12"><img src="{{this.img_url}}" class="db_image" />
-              <h4>{{this.title}} #{{this.issue}} {{this.publish_date}}</h4>
-              <p>Publisher: {{this.publisher}} | Role: {{this.role}}</p>
+              
+              <p>Format: {{this.format}} | Page: {{this.page_num}}</p>
+              <p>Database ID: {{this.id}} | Book ID: {{this.BookId}}</p>
+              <form action="/cms/editArt/{{this.id}}" method="get">
+                <button type="submit" class="btn btn-default">Edit Artwork</button>
+              </form>
             </div>
           </div>
 
@@ -63,16 +64,6 @@
       </div>
       </a>
       {{/each}}
-
-    {{/if}}
-    
-    {{#unless books}}
-      
-        <!-- No Results message -->
-
-        <p>There are no results available.</p>
-
-    {{/unless}}
 
     </div>
   </div>
@@ -97,41 +88,21 @@
 
 
             if (typeSearch == 'character') {
-                var url = currentURL+'/character/'+searchString;
-                // window.location.href = url;
+                var url = currentURL+'/cms/character/'+searchString;
+                
                 window.location.replace (url);
-                // window.location.pathname = 'character/'+searchString;
-
-
-
-              // $.ajax({
-              //   url: currentURL+"/character/"+searchString,
-              //   type: "get",
-              //   success: function(res) {}
-              // })
-
-
-
-
-                // $.post("/character", searchString)
-                //     .done(function(data) {
-                //         // Update listing
-                //     });
+                        
 
             } else {
 
-                var url = currentURL+'/title/'+searchString;
-                // window.location.href = url;
+                var url = currentURL+'/cms/title/'+searchString;
+                
                 window.location.replace (url);
-                // window.location.pathname = 'character/'+searchString;
+                
 
-
-                // $.post("/title", searchString)
-                //     .done(function(data) {
-                //         // Update listing
-                //     });
 
             }
 
 });
 </script>
+

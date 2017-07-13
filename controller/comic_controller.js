@@ -40,10 +40,6 @@ router.get("/product/:id", function(req, res) {
         };
         var cleanedData = JSON.parse(JSON.stringify(hbsObject));
         console.log(cleanedData)
-            // console.log(cleanedData.books[0].Artworks)
-            // console.log(JSON.parse(JSON.stringify(hbsObject)));
-            // console.log(hbsObject)
-            // console.log(hbsObject.books[0].Artworks);
         res.render("product", hbsObject);
     }).catch(function(err) {
         console.log("Error Message: " + err);
@@ -199,8 +195,7 @@ router.post("/artwork", function(req, res) {
 });
 
 
-
-//Passport Routes
+//Authentication
 
 router.get("/signup", function(req, res) {
 
@@ -242,6 +237,7 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 })
 
 
+//CMS Stuff
 
 
 router.get("/cms", function(req, res) {
@@ -252,6 +248,185 @@ router.get("/cms", function(req, res) {
     }
 
 })
+
+router.get("/cms/books", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+        db.Book.findAll({
+        // order: sequelize.col('publish_date', 'DESC')
+        order: [
+            ['publish_date', 'DESC']
+        ]
+    }).then(function(dbBook) {
+        var hbsObject = {
+            books: dbBook
+        };
+        res.render("cmsBooks", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+    }
+})
+
+router.get("/cms/title/:title", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+    var title = req.params.title
+    title = decodeURI(title);
+    var hasTitle = "%" + title + "%";
+    db.Book.findAll({
+        order: [
+            ['publish_date', 'DESC']
+        ],
+        where: {
+            title: {
+                $like: hasTitle
+            }
+        }
+    }).then(function(dbBook) {
+        var hbsObject = {
+            books: dbBook
+        };
+        res.render("cmsTitle", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+    }
+
+});
+
+
+router.get("/cms/artworks", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+        db.Artwork.findAll({
+        // order: sequelize.col('publish_date', 'DESC')
+        order: [
+            ['BookId', 'DESC']
+        ]
+    }).then(function(dbArtwork) {
+        var hbsObject = {
+            books: dbArtwork
+        };
+        res.render("cmsArtworks", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+    }
+})
+
+router.get("/cms/edit/:id", function(req, res) {
+
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+        db.Book.findAll({
+        include: [db.Artwork],
+        where: {
+            id: req.params.id
+        }
+    }).then(function(dbBook) {
+        var hbsObject = {
+            books: dbBook
+        };
+        // var cleanedData = JSON.parse(JSON.stringify(hbsObject));
+        // console.log(cleanedData)
+
+        res.render("editBook", hbsObject);
+    })
+
+}
+
+});
+
+router.post("/cms/edit", function(req, res) {
+    console.log("Made It!");
+    if (!req.user) {
+        return res.send('You do not have authorization.')
+    } else {
+
+        db.Book.update({
+            title: req.body.title,
+            issue: req.body.issue,
+            publish_date: req.body.publish_date,
+            publisher: req.body.publisher,
+            synopsis: req.body.synopsis,
+            role: req.body.role,
+            img_url: req.body.img_url,
+            characters: req.body.characters,
+            teams: req.body.teams
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function(dbBook) {
+            res.json("/cms");
+        }).catch(function(err) {
+            console.log("Error Message: " + err);
+            res.send("You got an error!");
+        });
+
+    }
+
+});
+
+router.post("/cms/editArt", function(req, res) {
+    console.log("Made It!");
+    if (!req.user) {
+        return res.send('You do not have authorization.')
+    } else {
+
+        db.Artwork.update({
+            page_num: req.body.page_num,
+            format: req.body.format,
+            img_url: req.body.img_url,
+            description: req.body.description,
+            feature: req.body.feature,
+            BookId: req.body.BookId
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function(dbBook) {
+            res.json("/cms");
+        }).catch(function(err) {
+            console.log("Error Message: " + err);
+            res.send("You got an error!");
+        });
+
+    }
+
+});
+
+router.get("/cms/editArt/:id", function(req, res) {
+
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+        db.Artwork.findAll({
+        where: {
+            id: req.params.id
+        }
+    }).then(function(dbBook) {
+        var hbsObject = {
+            books: dbBook
+        };
+        // var cleanedData = JSON.parse(JSON.stringify(hbsObject));
+        // console.log(cleanedData)
+
+        res.render("editArtwork", hbsObject);
+    })
+
+}
+
+});
+
 
 
 
