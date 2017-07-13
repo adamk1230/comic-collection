@@ -1,4 +1,5 @@
 
+<!-- Add Artwork -->
 
 	<div class = "jumbotron">
     <div class = "container">
@@ -80,16 +81,24 @@
         BookId: $("#books_id").val().trim()
       };
 
-      // function to convert characters to HTML entities
-      function replaceStr(str) {
-  		return str
-	      .replace(/&/g, "&amp;")
-	      .replace(/</g, "&lt;")
-	      .replace(/>/g, "&gt;")
-	      .replace(/"/g, "&quot;")
-	      .replace(/'/g, "&#039;");
+      // function to convert paragraph breaks to HTML tags
+   	  function replaceStr(str) {
+  			return str
+  			.replace(/\r?\n|\r/g, "<br />");
 			}
+
 			newArtwork.description = replaceStr(newArtwork.description);
+
+      // function to convert characters to HTML entities
+   	//  function replaceStrCharacters(str) {
+  	// 	return str
+	  //     .replace(/&/g, "&amp;")
+	  //     .replace(/</g, "&lt;")
+	  //     .replace(/>/g, "&gt;")
+	  //     .replace(/"/g, "&quot;")
+	  //     .replace(/'/g, "&#039;");
+			// }
+
 
       console.log(newArtwork);
 
@@ -100,7 +109,7 @@
         // alert("Adding artwork to database...");
 
 				// Display sucess message at top of page
-        $("#message").html("<p>Sucess! Artwork added to database.</p>");
+        $("#message").html("<p>Success! Artwork added to database.</p>");
 
         // Clear form 
         $("#pageNumber").val("");
@@ -112,6 +121,5 @@
 
     	});
      });
-  </script>
 
-	
+  </script>

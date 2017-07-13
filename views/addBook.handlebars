@@ -1,4 +1,6 @@
 
+<!-- Add Book -->
+
 	<div class = "jumbotron">
     <div class = "container">
       <h1>Published Works</h1>
@@ -102,8 +104,16 @@
         teams: $("#teams").val().trim()
       };
 
+      // function to convert paragraph breaks to HTML tags
+   	  function replaceStr(str) {
+  			return str
+	      .replace(/\r?\n|\r/g, "<br /><br />");
+			}
+
+			newBook.synopsis = replaceStr(newBook.synopsis);
+
       // function to convert characters to HTML entities
-   	//   function replaceStr(str) {
+   	//   function replaceStrCharacters(str) {
   	// 		return str
 	  //     .replace(/&/g, "&amp;")
 	  //     .replace(/</g, "&lt;")
@@ -111,8 +121,6 @@
 	  //     .replace(/"/g, "&quot;")
 	  //     .replace(/'/g, "&#039;");
 			// }
-
-			// newBook.synopsis = replaceStr(newBook.synopsis);
       
       $.post("/book", newBook)
       .done(function(data) {
@@ -120,7 +128,7 @@
         // alert("Adding book...");
 
         // Display sucess message at top of page
-        $("#message").html("<p>Sucess! Book added to database. Add another or <a href=\"/\">view entire collection.</a></p>");
+        $("#message").html("<p>Success! Book added to database. Add another or <a href=\"/\">view entire collection.</a></p>");
 
         // Clear the form
         $("#title").val("");
@@ -134,6 +142,5 @@
         $("#teams").val("");
       });
     });
-  </script>
 
-	
+  </script>
