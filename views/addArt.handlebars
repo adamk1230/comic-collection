@@ -80,8 +80,16 @@
         BookId: $("#books_id").val().trim()
       };
 
+      // function to convert paragraph breaks to HTML tags
+   // 	  function replaceStr(str) {
+  	// 		return str
+  	// 		.replace(/\r?\n|\r/g, "<br /><br />");
+			// }
+
+			// newArtwork.description = replaceStr(newArtwork.description);
+
       // function to convert characters to HTML entities
-   //    function replaceStr(str) {
+   //    function replaceStrCharacters(str) {
   	// 	return str
 	  //     .replace(/&/g, "&amp;")
 	  //     .replace(/</g, "&lt;")
@@ -89,7 +97,7 @@
 	  //     .replace(/"/g, "&quot;")
 	  //     .replace(/'/g, "&#039;");
 			// }
-			// newArtwork.description = replaceStr(newArtwork.description);
+			
 
       console.log(newArtwork);
 
