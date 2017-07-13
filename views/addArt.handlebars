@@ -81,15 +81,15 @@
       };
 
       // function to convert paragraph breaks to HTML tags
-   // 	  function replaceStr(str) {
-  	// 		return str
-  	// 		.replace(/\r?\n|\r/g, "<br /><br />");
-			// }
+   	  function replaceStr(str) {
+  			return str
+  			.replace(/\r?\n|\r/g, "<br />");
+			}
 
-			// newArtwork.description = replaceStr(newArtwork.description);
+			newArtwork.description = replaceStr(newArtwork.description);
 
       // function to convert characters to HTML entities
-   //    function replaceStrCharacters(str) {
+   	//  function replaceStrCharacters(str) {
   	// 	return str
 	  //     .replace(/&/g, "&amp;")
 	  //     .replace(/</g, "&lt;")
@@ -97,7 +97,7 @@
 	  //     .replace(/"/g, "&quot;")
 	  //     .replace(/'/g, "&#039;");
 			// }
-			
+
 
       console.log(newArtwork);
 
