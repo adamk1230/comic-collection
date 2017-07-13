@@ -366,7 +366,7 @@ router.post("/cms/edit", function(req, res) {
                 id: req.body.id
             }
         }).then(function(dbBook) {
-            res.send("Book has been updated.");
+            res.json("/cms");
         }).catch(function(err) {
             console.log("Error Message: " + err);
             res.send("You got an error!");
@@ -394,7 +394,7 @@ router.post("/cms/editArt", function(req, res) {
                 id: req.body.id
             }
         }).then(function(dbBook) {
-            res.send("Artwork has been updated.");
+            res.json("/cms");
         }).catch(function(err) {
             console.log("Error Message: " + err);
             res.send("You got an error!");

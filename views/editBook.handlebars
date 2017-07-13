@@ -116,24 +116,13 @@
       
       
       $.post("/cms/edit", newBook)
-      .done(function(data) {
-        console.log(data);
-        // alert("Adding book...");
-
-        // Display sucess message at top of page
-        $("#message").html("<p>Sucess! Book added to database. Add another or <a href=\"/\">view entire collection.</a></p>");
-
-        // Clear the form
-        $("#title").val("");
-        $("#issue").val("");
-        $("#publishDate").val("");
-        $("#publisher").val("");
-        $("#synopsis").val("");
-        $("#role").val("");
-        $("#img_url").val("");
-        $("#characters").val("");
-        $("#teams").val("");
-      });
+      .then(function(data) {
+      	console.log("You Made it Here")
+      window.location.replace(data);
+      // If there's an error, log the error
+    }).catch(function(err) {
+      console.log(err);
+    });
     });
   </script>
 
