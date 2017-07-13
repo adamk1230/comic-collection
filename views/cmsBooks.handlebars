@@ -50,9 +50,13 @@
         <div class="panel-body">
         
           <div class="row">
-            <div class="col-md-12"><img src="{{this.img_url}}" class="db_image" />
+            <div class="col-md-12">
               <h4>{{this.title}} #{{this.issue}} {{this.publish_date}}</h4>
               <p>Publisher: {{this.publisher}} | Role: {{this.role}}</p>
+              <p>Database ID: {{this.id}}</p>
+              <form action="/cms/edit/{{this.id}}" method="get">
+                <button type="sugmit" class="btn btn-default">Edit Book</button>
+              </form>
             </div>
           </div>
 
@@ -84,41 +88,21 @@
 
 
             if (typeSearch == 'character') {
-                var url = currentURL+'/character/'+searchString;
-                // window.location.href = url;
+                var url = currentURL+'/cms/character/'+searchString;
+                
                 window.location.replace (url);
-                // window.location.pathname = 'character/'+searchString;
-
-
-
-              // $.ajax({
-              //   url: currentURL+"/character/"+searchString,
-              //   type: "get",
-              //   success: function(res) {}
-              // })
-
-
-
-
-                // $.post("/character", searchString)
-                //     .done(function(data) {
-                //         // Update listing
-                //     });
+                        
 
             } else {
 
-                var url = currentURL+'/title/'+searchString;
-                // window.location.href = url;
+                var url = currentURL+'/cms/title/'+searchString;
+                
                 window.location.replace (url);
-                // window.location.pathname = 'character/'+searchString;
+                
 
-
-                // $.post("/title", searchString)
-                //     .done(function(data) {
-                //         // Update listing
-                //     });
 
             }
 
 });
 </script>
+
