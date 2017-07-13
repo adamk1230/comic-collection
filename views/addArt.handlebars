@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	<meta charset="UTF-8">
-		<!-- jQuery -->
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<!-- Bootswatch -->
-		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.min.css">
-		<!-- Local Styles -->
-		<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
-
-		<title>Add Artwork | Art Database</title>
-
-	</head>
-	<body>
+<!-- Add Artwork -->
 
 	<div class = "jumbotron">
     <div class = "container">
@@ -100,15 +81,15 @@
       };
 
       // function to convert characters to HTML entities
-      function replaceStr(str) {
-  		return str
-	      .replace(/&/g, "&amp;")
-	      .replace(/</g, "&lt;")
-	      .replace(/>/g, "&gt;")
-	      .replace(/"/g, "&quot;")
-	      .replace(/'/g, "&#039;");
-			}
-			newArtwork.description = replaceStr(newArtwork.description);
+   //    function replaceStr(str) {
+  	// 	return str
+	  //     .replace(/&/g, "&amp;")
+	  //     .replace(/</g, "&lt;")
+	  //     .replace(/>/g, "&gt;")
+	  //     .replace(/"/g, "&quot;")
+	  //     .replace(/'/g, "&#039;");
+			// }
+			// newArtwork.description = replaceStr(newArtwork.description);
 
       console.log(newArtwork);
 
@@ -119,7 +100,7 @@
         // alert("Adding artwork to database...");
 
 				// Display sucess message at top of page
-        $("#message").html("<p>Sucess! Artwork added to database.</p>");
+        $("#message").html("<p>Success! Artwork added to database.</p>");
 
         // Clear form 
         $("#pageNumber").val("");
@@ -132,6 +113,3 @@
     	});
      });
   </script>
-
-		</body>
-	</html>

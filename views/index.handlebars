@@ -44,6 +44,9 @@
     <div class="col-md-12" id="bookList">
 
       <!-- Book Listing -->
+
+    {{#if books}}
+
       {{#each books}}
       <a href="/product/{{this.id}}">
       <div class="panel panel-default">
@@ -60,6 +63,16 @@
       </div>
       </a>
       {{/each}}
+
+    {{/if}}
+    
+    {{#unless books}}
+      
+        <!-- No Results message -->
+
+        <p>There are no results available.</p>
+
+    {{/unless}}
 
     </div>
   </div>
