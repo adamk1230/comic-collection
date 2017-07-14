@@ -19,6 +19,11 @@ module.exports = function(sequelize, DataTypes) {
 			password: {
 				type: DataTypes.STRING,
 				allowNull: false
+			},
+			verification: {
+				type: DataTypes.BOOLEAN,
+				allowNull: false,
+				defaultValue: false
 			}
 		},
 		{

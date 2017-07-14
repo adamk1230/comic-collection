@@ -1,0 +1,128 @@
+  {{!-- Header with link back to CMS --}}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/cms">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>  BACK TO CMS
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Artwork Listing -->
+
+  <div class="container">
+
+  <h2>Users</h2>
+    <div class="row">
+      <div class="col-md-12">
+
+      <!-- Search Form -->
+
+      <form class="form-inline">
+
+      <div class="form-group">
+        <label for="searchString" class="control-label">SEARCH: &nbsp;</label>
+      </div>
+
+      <div class="form-group">
+         <label class="radio-inline">
+              <input type="radio" name="searchRadio" id="dbId" value="dbId" checked="checked"> By Database ID
+            </label>
+
+            <label class="radio-inline">
+              <input type="radio" name="searchRadio" id="byEmail" value="Email"> By Email &nbsp;
+            </label>
+        </div>
+
+        <div class="form-group">       
+          <input type="text" class="form-control" id="searchString" placeholder="Wolverine">
+        </div>
+        
+        <button type="button" class="btn btn-default" id="searchButton">Submit</button>
+
+      </form>  
+
+      </div> <!-- End of column -->
+    </div> <!-- End of row -->
+
+<hr />
+  <div class="row">
+    <div class="col-md-12" id="bookList">
+
+      <!-- Book Listing -->
+      {{#each books}}
+      
+      <div class="panel panel-default">
+        <div class="panel-body">
+        
+          <div class="row">
+            <div class="col-md-12">
+              
+              
+              <p>Database ID: {{this.id}}</p>
+              <p>Email: {{this.email}}</p>
+              <p>Joined: {{this.createdAt}}</p>
+              {{#if this.verification}}
+              <p>Verification Status: Verified</p>
+              {{/if}}
+              {{#unless this.verification}}
+              <p>Verification Status: Not Verified</p>
+              
+              
+              <form action="/cms/user/{{this.id}}?_method=PUT" method="post" style="float: left; padding: 5px;">
+                <button type="submit" class="btn btn-default">Verify User</button>
+              </form>
+              {{/unless}}
+              <form action="/cms/user/{{this.id}}?_method=DELETE" method="post" style="float: left; padding: 5px;">
+                <button type="submit" class="btn btn-default">Delete User</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      {{/each}}
+
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  $("#searchButton").on("click", function() {
+           
+
+            // Pick-up search value
+            var searchString = $("#searchString").val().trim();
+            searchString = encodeURI(searchString);
+
+            // Pick up radio button value
+            var typeSearch = $('input[name="searchRadio"]:checked').val();
+
+            // Determine which route to use for search based on radio button value
+            console.log(searchString);
+
+            var currentURL = window.location.origin;
+
+
+            if (typeSearch == 'Email') {
+                var url = currentURL+'/cms/user/email/'+searchString;
+                
+                window.location.replace (url);
+                        
+
+            } else {
+
+                var url = currentURL+'/cms/user/dbid/'+searchString;
+                
+                window.location.replace (url);
+                
+
+
+            }
+
+});
+</script>
+
