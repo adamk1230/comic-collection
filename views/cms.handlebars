@@ -1,44 +1,76 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-       <link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.min.css">
-      
-      <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-    <meta charset="utf-8">
-    <title>The Comic-Collective</title>
-  </head>
-  
-  <body>
-  <!-- Jumbotron -->
-  <div class = "jumbotron">
-    <div class = "container">
-      <h1>Published Works</h1>
-      <h3>Comics &amp; Graphic Novels</h3>
+   <!-- Jumbotron -->
+    <div class = "jumbotron">
+      <div class = "container">
+        <h1>Kubert's Comic Compendium</h1>
+        <h3>Content Manager</h3>
+      </div>
     </div>
-  </div>
 
-<div class="container">
+    <div class="container">
 
-<form action="/addart" method="get">
-<button type="submit" class="btn btn-default">Add Art</button>
-</form>
-<form action="/addbook" method="get">
-<button type="submit" class="btn btn-default">Add Book</button>
-</form>
-<form action="/cms/books" method="get">
-<button type="submit" class="btn btn-default">All Books</button>
-</form>
-<form action="/cms/artworks" method="get">
-<button type="submit" class="btn btn-default">All Artworks</button>
-</form>
+      <div class="row">
 
+        <div class="col-md-6">
 
-</div>
+          <div class="panel panel-default">
+            <div class="panel-body">
 
-    </body>
-    
-</html>
+              <form action="/addart" method="get" class="form-inline">
+                <button type="submit" class="btn btn-default rightSpace">Add Art</button>
+                <label> Add artwork to the database</label>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+
+              <form action="/addbook" method="get" class="form-inline">
+                <button type="submit" class="btn btn-default rightSpace">Add Book</button>
+                <label> Add book to the database</label>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form action="/cms/artworks" method="get" class="form-inline">
+                  <button type="submit" class="btn btn-default rightSpace">All Artwork</button>
+                  <label> View list of all artwork</label>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form action="/cms/books" method="get" class="form-inline">
+                  <button type="submit" class="btn btn-default rightSpace">All Books</button>
+                  <label> View list of all books</label>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
