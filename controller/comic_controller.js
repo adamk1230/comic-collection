@@ -290,7 +290,7 @@ router.get("/cms/title/:title", function(req, res) {
         var hbsObject = {
             books: dbBook
         };
-        res.render("cmsTitle", hbsObject);
+        res.render("cmsBooks", hbsObject);
     }).catch(function(err) {
         console.log("Error Message: " + err);
         res.send("You got an error!");
@@ -298,6 +298,90 @@ router.get("/cms/title/:title", function(req, res) {
     }
 
 });
+
+router.get("/cms/character/:character", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+    var character = req.params.character
+    character = decodeURI(character);
+    var hasCharacter = "%" + character + "%";
+    db.Book.findAll({
+        where: {
+            characters: {
+                $like: hasCharacter
+            }
+        }
+    }).then(function(dbBook) {
+        console.log(dbBook);
+        var hbsObject = {
+            books: dbBook
+        };
+        res.render("cmsBooks", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+
+    }
+
+});
+
+router.get("/cms/feature/:feature", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+    var feature = req.params.feature
+    feature = decodeURI(feature);
+    var hasFeature = "%" + feature + "%";
+    db.Artwork.findAll({
+        where: {
+            feature: {
+                $like: hasFeature
+            }
+        }
+    }).then(function(dbArtwork) {
+        
+        var hbsObject = {
+            books: dbArtwork
+        };
+        res.render("cmsArtworks", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+
+    }
+
+});
+
+
+router.get("/cms/bookid/:bookid", function(req, res) {
+    if (!req.user) {
+        return res.send("You do not have authorization.")
+    } else {
+    var bookId = req.params.bookid
+    bookId = decodeURI(bookId);
+    // var hasBookId = "%" + bookId + "%";
+    db.Artwork.findAll({
+        where: {
+            BookId: bookId
+        }
+    }).then(function(dbArtwork) {
+        
+        var hbsObject = {
+            books: dbArtwork
+        };
+        res.render("cmsArtworks", hbsObject);
+    }).catch(function(err) {
+        console.log("Error Message: " + err);
+        res.send("You got an error!");
+    });
+
+    }
+
+});
+
 
 
 router.get("/cms/artworks", function(req, res) {

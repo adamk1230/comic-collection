@@ -20,11 +20,11 @@
 
       <div class="form-group">
          <label class="radio-inline">
-              <input type="radio" name="searchRadio" id="byBookId" value="BookId" checked="checked"> By Book ID
+              <input type="radio" name="searchRadio" id="byTitle" value="title" checked="checked"> By Title
             </label>
 
             <label class="radio-inline">
-              <input type="radio" name="searchRadio" id="byFeature" value="Feature"> By Feature &nbsp;
+              <input type="radio" name="searchRadio" id="byCharacter" value="character"> By Character &nbsp;
             </label>
         </div>
 
@@ -50,13 +50,12 @@
         <div class="panel-body">
         
           <div class="row">
-            <div class="col-md-12"><img src="{{this.img_url}}" class="db_image" />
-              
-              <p>Format: {{this.format}} | Page: {{this.page_num}}</p>
-              <p>Database ID: {{this.id}} | Book ID: {{this.BookId}}</p>
-              <p>Description: {{{this.description}}}</p>
-              <form action="/cms/editArt/{{this.id}}" method="get">
-                <button type="submit" class="btn btn-default">Edit Artwork</button>
+            <div class="col-md-12">
+              <h4>{{this.title}} #{{this.issue}} {{this.publish_date}}</h4>
+              <p>Publisher: {{this.publisher}} | Role: {{this.role}}</p>
+              <p>Database ID: {{this.id}}</p>
+              <form action="/cms/edit/{{this.id}}" method="get">
+                <button type="sugmit" class="btn btn-default">Edit Book</button>
               </form>
             </div>
           </div>
@@ -88,15 +87,15 @@
             var currentURL = window.location.origin;
 
 
-            if (typeSearch == 'Feature') {
-                var url = currentURL+'/cms/feature/'+searchString;
+            if (typeSearch == 'character') {
+                var url = currentURL+'/cms/character/'+searchString;
                 
                 window.location.replace (url);
                         
 
             } else {
 
-                var url = currentURL+'/cms/bookid/'+searchString;
+                var url = currentURL+'/cms/title/'+searchString;
                 
                 window.location.replace (url);
                 
