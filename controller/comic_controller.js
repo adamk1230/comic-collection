@@ -49,23 +49,23 @@ router.get("/product/:id", function(req, res) {
 
 
 // Search by Title
-router.post("/title", function(req, res) {
+// router.post("/title", function(req, res) {
 
-    db.Book.findAll({
-        order: [
-            ['publish_date', 'DESC']
-        ],
-        where: {
-            title: req.body.title
-        }
-    }).then(function(dbBook) {
-        res.json(dbBook);
-    }).catch(function(err) {
-        console.log("Error Message: " + err);
-        res.send("You got an error!");
-    });
+//     db.Book.findAll({
+//         order: [
+//             ['publish_date', 'DESC']
+//         ],
+//         where: {
+//             title: req.body.title
+//         }
+//     }).then(function(dbBook) {
+//         res.json(dbBook);
+//     }).catch(function(err) {
+//         console.log("Error Message: " + err);
+//         res.send("You got an error!");
+//     });
 
-});
+// });
 
 router.get("/title/:title", function(req, res) {
     var title = req.params.title
