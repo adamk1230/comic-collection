@@ -14,20 +14,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12"><img src="{{this.img_url}}" class="db_image_product" id="bookImage" />
-      <h2>{{this.title}}</h2>
-      <p>Year: {{this.publish_date}}</p>
-      <p>Publisher: {{this.publisher}}</p>
-      <p>Role: {{this.role}}</p>
-      <p>Characters: {{this.characters}}</p>
-      <p>Teams: {{this.teams}}</p>
-      <p>Synopsis: {{{this.synopsis}}}</p>
-      <p>Databse ID: {{this.id}}</p>
-      {{#if this.Artworks}}
-      <p>Artwork is <strong>available</strong></p>
-      {{/if}}
-      {{#unless this.Artworks}}
-      <p>Artwork is <strong>unavailable</strong></p>
-      {{/unless}}
+    
+      <div class="column-cell">
+        <h2>{{this.title}} #{{this.issue}}</h2>
+        <p>Year: {{this.publish_date}}</p>
+        <p>Publisher: {{this.publisher}}</p>
+        <p>Role: {{this.role}}</p>
+        <p>Characters: {{this.characters}}</p>
+        <p>Teams: {{this.teams}}</p>
+        <p>Synopsis: {{{this.synopsis}}}</p>
+        <p>Databse ID: {{this.id}}</p>
+        {{#if this.Artworks}}
+        <p>Artwork is <strong>available</strong></p>
+        {{/if}}
+        {{#unless this.Artworks}}
+        <p>Artwork is <strong>unavailable</strong></p>
+        {{/unless}}
+        </div>
+
     </div>
   </div>
 </div>
