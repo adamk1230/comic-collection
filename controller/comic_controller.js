@@ -121,7 +121,7 @@ router.get("/addbook", function(req, res) {
     if (!req.user) {
         return res.send("You do not have authorization.")
     } else {
-        res.render("addbook")
+        res.render("addBook")
     }
 
 
