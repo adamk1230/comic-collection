@@ -185,10 +185,11 @@ router.get("/cms", function(req, res) {
 
 
 router.get("/addbook", function(req, res) {
-    console.log("user ver: " + req.user.verification)
-    if (!req.user.verification) {
+    console.log(req.user)
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
+
         res.render("addBook")
     }
 
@@ -199,7 +200,7 @@ router.get("/addbook", function(req, res) {
 // Add new Book
 router.post("/book", function(req, res) {
 
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send('You do not have authorization.')
     } else {
 
@@ -227,7 +228,7 @@ router.post("/book", function(req, res) {
 
 router.get("/addart", function(req, res) {
 
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send('You do not have authorization.')
     } else {
         return res.render("addArt")
@@ -237,7 +238,7 @@ router.get("/addart", function(req, res) {
 
 // Add new Artwork
 router.post("/artwork", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send('You do not have authorization.')
     } else {
 
@@ -261,7 +262,7 @@ router.post("/artwork", function(req, res) {
 
 
 router.get("/cms/books", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
         db.Book.findAll({
@@ -282,7 +283,7 @@ router.get("/cms/books", function(req, res) {
 })
 
 router.get("/cms/title/:title", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     var title = req.params.title
@@ -311,7 +312,7 @@ router.get("/cms/title/:title", function(req, res) {
 });
 
 router.get("/cms/character/:character", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     var character = req.params.character;
@@ -339,7 +340,7 @@ router.get("/cms/character/:character", function(req, res) {
 });
 
 router.get("/cms/feature/:feature", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     var feature = req.params.feature
@@ -368,7 +369,7 @@ router.get("/cms/feature/:feature", function(req, res) {
 
 
 router.get("/cms/bookid/:bookid", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     var bookId = req.params.bookid
@@ -396,7 +397,7 @@ router.get("/cms/bookid/:bookid", function(req, res) {
 
 
 router.get("/cms/artworks", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
         db.Artwork.findAll({
@@ -418,7 +419,7 @@ router.get("/cms/artworks", function(req, res) {
 
 router.get("/cms/edit/:id", function(req, res) {
 
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
         db.Book.findAll({
@@ -442,7 +443,7 @@ router.get("/cms/edit/:id", function(req, res) {
 
 router.post("/cms/edit", function(req, res) {
     console.log("Made It!");
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send('You do not have authorization.')
     } else {
 
@@ -473,7 +474,7 @@ router.post("/cms/edit", function(req, res) {
 
 router.post("/cms/editArt", function(req, res) {
     console.log("Made It!");
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send('You do not have authorization.')
     } else {
 
@@ -501,7 +502,7 @@ router.post("/cms/editArt", function(req, res) {
 
 router.get("/cms/editArt/:id", function(req, res) {
 
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
         db.Artwork.findAll({
@@ -525,7 +526,7 @@ router.get("/cms/editArt/:id", function(req, res) {
 
 router.get("/cms/users", function(req, res) {
 
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     db.User.findAll({
@@ -545,7 +546,7 @@ router.get("/cms/users", function(req, res) {
 });
 
 router.put("/cms/user/:id", function(req, res) {
-     if (!req.user.verification) {
+     if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {   
 
@@ -562,7 +563,7 @@ router.put("/cms/user/:id", function(req, res) {
 });
 
 router.delete("/cms/user/:id", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {    
     db.User.destroy( {
@@ -576,7 +577,7 @@ router.delete("/cms/user/:id", function(req, res) {
 });
 
 router.get("/cms/user/email/:email", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {    
     var email = req.params.email;
@@ -605,7 +606,7 @@ router.get("/cms/user/email/:email", function(req, res) {
 });
 
 router.get("/cms/user/dbid/:dbid", function(req, res) {
-    if (!req.user.verification) {
+    if (!req.user || !req.user.verification) {
         return res.send("You do not have authorization.")
     } else {
     db.User.findAll({
